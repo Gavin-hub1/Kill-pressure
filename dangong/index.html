@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>烦恼弹弓</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app">
+      <section class="game-shell" aria-label="烦恼弹弓游戏">
+        <canvas id="gameCanvas" aria-label="拖动弹弓发射石子，击碎写着烦恼的云朵"></canvas>
+
+        <div class="hud top-left">
+          <div class="brand">烦恼弹弓</div>
+          <div class="hint">按住石子，往后拉，松手发射</div>
+        </div>
+
+        <div class="hud top-right">
+          <div class="meter">
+            <span>连击</span>
+            <strong id="comboValue">0</strong>
+          </div>
+          <div class="meter">
+            <span>模式</span>
+            <strong id="modeValue">石子</strong>
+          </div>
+          <button id="diaryButton" class="diary-button" type="button">
+            <span>每日</span>
+            <strong>记录</strong>
+          </button>
+          <button id="accountButton" class="diary-button account-button" type="button">
+            <span>账户</span>
+            <strong id="accountLabel">登录</strong>
+          </button>
+        </div>
+
+        <section class="panel" aria-label="今日烦恼">
+          <form id="worryForm" class="worry-form">
+            <label for="worryInput">今天要打掉什么？</label>
+            <div class="input-row">
+              <input id="worryInput" name="worry" type="text" maxlength="18" placeholder="比如：实习、未来、钱" autocomplete="off">
+              <button type="submit">添加</button>
+            </div>
+          </form>
+
+          <div class="worry-list-wrap">
+            <div class="list-title">今日云朵</div>
+            <div id="worryList" class="worry-list"></div>
+          </div>
+
+          <button id="resetButton" class="ghost-button" type="button">重置今天</button>
+        </section>
+
+        <section id="reflectionPrompt" class="reflection-prompt hidden" aria-live="polite">
+          <div class="prompt-title" id="encourageText">精准度太棒了！让烦恼都烟消云散！</div>
+          <label for="reflectionInput">记录此刻的想法</label>
+          <textarea id="reflectionInput" rows="3" maxlength="180" placeholder="比如：打完这些烦恼后，我发现自己其实没那么怕。"></textarea>
+          <div class="prompt-actions">
+            <button id="skipReflection" class="ghost-button small" type="button">稍后再说</button>
+            <button id="saveReflection" class="save-button" type="button">保存记录</button>
+          </div>
+        </section>
+
+        <section id="diaryDrawer" class="diary-drawer hidden" aria-label="每日记录">
+          <div class="diary-head">
+            <div>
+              <div class="diary-kicker">心灵日记</div>
+              <h2>每日记录</h2>
+            </div>
+            <button id="closeDiary" class="icon-button" type="button" aria-label="关闭每日记录">×</button>
+          </div>
+          <div id="diaryEntries" class="diary-entries"></div>
+        </section>
+
+        <section id="accountModal" class="modal hidden" aria-label="账户">
+          <form id="accountForm" class="modal-card">
+            <div class="diary-kicker">账户同步</div>
+            <h2 id="accountTitle">登录账户</h2>
+            <p id="accountHint">登录后，每日记录会保存到账户里，换浏览器也能找回来。</p>
+            <label for="usernameInput">用户名</label>
+            <input id="usernameInput" name="username" maxlength="24" autocomplete="username" placeholder="输入用户名">
+            <label for="passwordInput">密码</label>
+            <input id="passwordInput" name="password" type="password" maxlength="64" autocomplete="current-password" placeholder="输入密码">
+            <div id="accountMessage" class="account-message" aria-live="polite"></div>
+            <div class="prompt-actions">
+              <button id="closeAccount" class="ghost-button small" type="button">关闭</button>
+              <button id="submitAccount" class="save-button" type="submit">登录</button>
+            </div>
+            <button id="toggleAccountMode" class="link-button" type="button">没有账户？创建一个</button>
+            <button id="logoutButton" class="link-button hidden" type="button">退出当前账户</button>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
